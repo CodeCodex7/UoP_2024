@@ -30,7 +30,7 @@ public class TextReplacment : MonoService<TextReplacment>
         }
         else
         {
-            Debug.Log(string.Format("Searched for key {0} -> not Found",Key));
+            //Debug.Log(string.Format("Searched for key {0} -> not Found",Key));
             return "TEXT KEY NOT FOUND";
         }
     }
@@ -46,7 +46,7 @@ public class TextReplacment : MonoService<TextReplacment>
         foreach (var W in Words)
         {
             TextDict.Add(W.m_key, W.m_Text);
-            Debug.Log(string.Format("Value = {0} , Key = {1}",W.m_Text,W.m_key));
+            //Debug.Log(string.Format("Value = {0} , Key = {1}",W.m_Text,W.m_key));
         }
 
 

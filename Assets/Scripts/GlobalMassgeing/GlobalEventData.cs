@@ -1,30 +1,49 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "EventList", menuName = "Oliver's Toolbox/GlobalEventList")]
 public class GlobalEventData : ScriptableObject
 {
 
-    public List<MessageData> Events
-    {
-        get { return m_EventData; }
-        set { m_EventData = value; }
-    }
+    //public  List<MessageData> m_Events = new List<MessageData>();
 
     [SerializeField]
-    private List<MessageData> m_EventData;
+    public EventData [] m_EventData;
+
+    //public void AddData()
+    //{
+    //    m_EventData = m_Events.ToArray();
+    //}
+
+    //public void loadData()
+    //{
+
+    //}
+    //public void SaveAsset()
+    //{
+    //    m_Events.
+    //}
 
 
-    public List<MessageData> testData
-    {
-        get { return m_testData; }
-        set { m_testData = value; }
-    }
+}
+
+
+[Serializable]
+public class EventData
+{
+    [SerializeField]
+    public string Name;
 
     [SerializeField]
-    private List<MessageData> m_testData;
+    public int ID;
 
-
+    public EventData(int id,string name)
+    {
+        ID = id;
+        Name = name;
+    }
 
 }

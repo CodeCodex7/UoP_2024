@@ -22,6 +22,7 @@ public class GlobalEventlistEditor : Editor
     public override void OnInspectorGUI()
     {
         data = (GlobalEventData)target;
+        //data.loadData();
         Header(); 
         AddData(data);
         ClearData(data);
@@ -44,16 +45,16 @@ public class GlobalEventlistEditor : Editor
     public void DisplayData(GlobalEventData data)
     {
 
-        if (data.testData != null)
+        if (data.m_EventData != null)
         {
-            for (int i = 0; i < data.testData.Count; i++)
+            for (int i = 0; i < data.m_EventData.Length; i++)
             {
-                DisplayElement(i, data.testData[i]);
+                DisplayElement(i, data.m_EventData[i]);
             }
         }
 
     }
-    public void DisplayElement(int i, MessageData Data)
+    public void DisplayElement(int i,EventData Data)
     {
         GUILayout.BeginHorizontal() ;
 
@@ -63,8 +64,8 @@ public class GlobalEventlistEditor : Editor
         TextStyle.fixedWidth = 300;
         TextStyle.normal.textColor = Color.white;
         
-        var text = GUILayout.TextField(Data.EventName,50,TextStyle);
-        Data.EventName = text;
+        var text = GUILayout.TextField(Data.Name,50,TextStyle);
+        Data.Name = text;
 
         GUILayout.Space(10);
         #endregion
@@ -75,8 +76,8 @@ public class GlobalEventlistEditor : Editor
         IntStyle.fixedWidth = 40;
         TextStyle.normal.textColor = Color.white;
 
-        var ID = EditorGUILayout.IntField("", Data.EventID,IntStyle);
-        Data.EventID = ID;
+        var ID = EditorGUILayout.IntField("", Data.ID,IntStyle);
+        Data.ID = ID;
 
         GUILayout.Space(10);
         #endregion
@@ -120,8 +121,9 @@ public class GlobalEventlistEditor : Editor
     {
         if (GUILayout.Button("Clear All Data in List"))
         {
-            Data.testData.Clear();
+           // Data.m_EventData.Clear()
             EditorUtility.SetDirty(Data);
+            //Data.SaveAsset();
             AssetDatabase.SaveAssets();
         }
     }
@@ -130,13 +132,13 @@ public class GlobalEventlistEditor : Editor
     {
         if (GUILayout.Button("Clear All Data"))
         {
-            if (Data.testData != null)
+            if (Data.m_EventData != null)
             {
 
             }
             else
             {
-                Data.testData = new List<MessageData>();
+                Data.m_EventData = new EventData[10];
             }
         }
     }
@@ -163,19 +165,24 @@ public class GlobalEventlistEditor : Editor
     public void AddSingleElement(GlobalEventData Data)
     {
 
-        if (Data.testData == null)
+        if (Data.m_EventData == null)
         {
-            Data.testData = new List<MessageData>();
+           // Data = new List<MessageData>();
+           Data.m_EventData = new EventData[10];
         }
 
-        int C1 = Data.testData.Count;
+        var d = Data.m_EventData.ToList();
+
+        int C1 = d.Count;
         int c2 = C1 + 1;
         for (int i = C1; i < c2; i++)
         {
             //Data.Events.Add(new MessageData(i,Time.frameCount.ToString()));
-           Data.testData.Add(new MessageData(i, "OnEventNamed",typeof(object)));
-           
-        }        
+           d.Add(new EventData(i, "OnEventNamed"));
+        }
+
+        data.m_EventData = d.ToArray();
+        //data.SaveAsset();
         EditorUtility.SetDirty(Data);
         AssetDatabase.SaveAssets();
     }

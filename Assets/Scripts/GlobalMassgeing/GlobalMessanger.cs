@@ -18,7 +18,7 @@ public class GlobalMessanger : MonoService<GlobalMessanger>
     void Start()
     {
         RegisterService();
-        //Initialistion();
+        Initialistion();
     }
 
     private void OnDestroy()
@@ -30,8 +30,8 @@ public class GlobalMessanger : MonoService<GlobalMessanger>
     void Update()
     {
 
-        EventActions = new Dictionary<int, List<Action>>();
-        DelegateEventActions = new Dictionary<int, List<EventCallback>>();
+        //EventActions = new Dictionary<int, List<Action>>();
+        //DelegateEventActions = new Dictionary<int, List<EventCallback>>();
     }
 
     int NameToId(string Name)
@@ -86,14 +86,21 @@ public class GlobalMessanger : MonoService<GlobalMessanger>
 
     public void BroadcastEvent(int ID,MessageData data)
     {
-        foreach (var item in DelegateEventActions[ID])
+        if (DelegateEventActions.ContainsKey(ID))
         {
-            item.Invoke(data);
+            foreach (var item in DelegateEventActions[ID])
+            {
+                item.Invoke(data);
+            }
         }
 
-        foreach (var item in EventActions[ID])
+
+        if (EventActions.ContainsKey(ID))
         {
-            item.Invoke();
+            foreach (var item in EventActions[ID])
+            {
+                item.Invoke();
+            }
         }
 
         Debug.Log(string.Format("Broadcasting Event {0} to {1} Action Listners, {2} Delagate Listner",IdToName(ID), EventActions[ID].Count, DelegateEventActions[ID].Count));
@@ -102,15 +109,21 @@ public class GlobalMessanger : MonoService<GlobalMessanger>
     public void BroadcastEvent(string Name, MessageData data)
     {
         int ID = NameToId(Name);
-
-        foreach (var item in DelegateEventActions[ID])
+        if (DelegateEventActions.ContainsKey(ID))
         {
-            item.Invoke(data);
+            foreach (var item in DelegateEventActions[ID])
+            {
+                item.Invoke(data);
+            }
         }
 
-        foreach (var item in EventActions[ID])
+        if (EventActions.ContainsKey(ID))
         {
-            item.Invoke();
+
+            foreach (var item in EventActions[ID])
+            {
+                item.Invoke();
+            }
         }
 
         Debug.Log(string.Format("Broadcasting Event {0} to {1} Action Listners, {2} Delagate Listner", Name, EventActions[ID].Count ,DelegateEventActions[ID].Count));
@@ -119,10 +132,13 @@ public class GlobalMessanger : MonoService<GlobalMessanger>
 
     void Initialistion()
     {
-        foreach (var item in eventData.Events)
+        foreach (var item in eventData.m_EventData)
         {
-            NametoID.Add(item.EventName, item.EventID);
-            IDtoName.Add(item.EventID,item.EventName);
+            NametoID.Add(item.Name, item.ID);
+            IDtoName.Add(item.ID,item.Name);
+
+            DelegateEventActions.Add(item.ID, new List<EventCallback>());
+            EventActions.Add(item.ID, new List<Action>());
         }
     }
 
@@ -132,7 +148,6 @@ public class GlobalMessanger : MonoService<GlobalMessanger>
     }
 
 }
-
 
 public class ScriptableMessageData
 { 
@@ -145,7 +160,6 @@ public class ScriptableMessageData
         EventID = eventID;
     }
 }
-
 
 /// <summary>
 /// Data Structure for GlobalEventData

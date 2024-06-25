@@ -12,3 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2530a205affeb9a4195cafa4dcf23df9, type: 3}
   m_Name: EventList
   m_EditorClassIdentifier: 
+  m_EventData:
+  - Name: OnEventNamed
+    ID: 0
+  - Name: OnEventNamed
+    ID: 1
+  - Name: OnEventNamed
+    ID: 2
