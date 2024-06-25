@@ -36,7 +36,7 @@ public class GlobalMessanger : MonoService<GlobalMessanger>
 
     int NameToId(string Name)
     {
-        return NametoID[name];
+        return NametoID[Name];
     }
 
     string IdToName(int ID)
@@ -168,7 +168,7 @@ public class MessageData
 {
     public string EventName; //Human Readable
     public int EventID;
-    public object Data;
+    public object ObjData;
     public Type Type;
 
     public MessageData(int Id, string Name,Type type)

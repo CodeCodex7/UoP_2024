@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Texts>
+  <Text key="*Menu" />
   <Text key="START">StartGame</Text>
   <Text key="EXIT">Exit</Text>
   <Text key="TITLE">The Last of the Dragons</Text>
+  <Text key="LANG">languages</Text>
+  <Text key="MACHINETRANSLATED">Langueses are machine translated</Text>
+  <Text key="CREDIT">Credits and tools</Text>
+  <Text key="*Sounds" />
+  <Text key="CLICK">*Click*</Text>
 </Texts>
 

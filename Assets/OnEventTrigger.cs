@@ -16,6 +16,19 @@ public class OnEventTrigger : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Services.Resolve<GlobalMessanger>().BroadcastEvent(0, null);
+
+            
+            //Services.Resolve<CanvasController>().Opencanvas("A");
+
+            var data = new MessageData(3, "Test", typeof(string));
+            data.ObjData = new string("[CLICK]");
+            Services.Resolve<GlobalMessanger>().BroadcastEvent("OnDisplayASubtitle", data);
+        }
+
+
+        if(Input.GetMouseButtonUp(0))
+        {
+            //Services.Resolve<CanvasController>().CloseCanvas("A");
         }
     }
 }

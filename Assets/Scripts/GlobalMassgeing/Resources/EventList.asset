@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: EventList
   m_EditorClassIdentifier: 
   m_EventData:
-  - Name: OnEventNamed
+  - Name: OnGameStart
     ID: 0
-  - Name: OnEventNamed
+  - Name: OnGameOver
     ID: 1
-  - Name: OnEventNamed
+  - Name: OnPause
     ID: 2
+  - Name: OnDisplayASubtitle
+    ID: 3

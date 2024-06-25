@@ -26,16 +26,34 @@ public class TextMeshProTextReplacment : MonoBehaviour
         
     }
 
+    public void RePollText()
+    {
+        TextReplacment();
+    }
     void TextReplacment()
     {
-        string CapturePattern = "\\[(.*?)\\]";
-        var Key = Regex.Match(m_Text.text, CapturePattern).Value;
-        
-        Key = Key.Trim(new Char[] { '[',']' });
-        var TextReplacement = Services.Resolve<TextReplacment>().GetText(Key);
-        m_Text.text = Regex.Replace(m_Text.text, CapturePattern, TextReplacement);
+        try
+        {
+            string CapturePattern = "\\[(.*?)\\]";
+            var Key = Regex.Match(m_Text.text, CapturePattern).Value;
 
+            Key = Key.Trim(new Char[] { '[', ']' });
+            Key = Key.ToUpper();
+            var TextReplacement = Services.Resolve<TextReplacment>().GetText(Key);
+            m_Text.text = Regex.Replace(m_Text.text, CapturePattern, TextReplacement);
+        }
+        catch(Exception e)
+        {
+            //Surpress for now
+            //Debug.LogException(e);
+        }
 
+    }
+
+    // Only in here so subtiles can destoy themselfs after beening displayed
+    void DeleteSelf()
+    {
+        Destroy(this.gameObject);
     }
 
 }
