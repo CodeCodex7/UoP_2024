@@ -21,3 +21,5 @@ MonoBehaviour:
     ID: 2
   - Name: OnDisplayASubtitle
     ID: 3
+  - Name: OnPlayerSpawned
+    ID: 4
