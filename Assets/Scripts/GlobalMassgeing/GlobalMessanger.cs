@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GlobalMessanger : MonoService<GlobalMessanger>
@@ -84,11 +86,22 @@ public class GlobalMessanger : MonoService<GlobalMessanger>
         DelegateEventActions[NameToId(EventName)].Add(delagate);
     }
 
+    public void UnSubscribe(int ID,Action action)
+    {
+        EventActions[ID].Remove(action);
+    }
+
+    public void UnSubscribe(int ID, EventCallback delagate)
+    {
+        DelegateEventActions[ID].Remove(delagate);
+    }
+
+
     public void BroadcastEvent(int ID,MessageData data)
     {
         if (DelegateEventActions.ContainsKey(ID))
         {
-            foreach (var item in DelegateEventActions[ID])
+            foreach (var item in DelegateEventActions[ID].ToList())
             {
                 item.Invoke(data);
             }

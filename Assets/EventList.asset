@@ -23,3 +23,7 @@ MonoBehaviour:
     ID: 3
   - Name: OnPlayerSpawned
     ID: 4
+  - Name: OnInventory
+    ID: 5
+  - Name: OnEventNamed
+    ID: 6

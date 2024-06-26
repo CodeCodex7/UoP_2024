@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class MenuButtons : MonoBehaviour
 {
@@ -32,6 +33,11 @@ public class MenuButtons : MonoBehaviour
     public void StartGame()
     {
         Services.Resolve<GameManager>().SpawnPlayer();
+    }
+
+    public void CloseInvetory()
+    {
+        Services.Resolve<InventoryUI>().CloseInventory();
     }
 
 }

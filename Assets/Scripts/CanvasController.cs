@@ -53,6 +53,19 @@ public class CanvasController : MonoService<CanvasController>
         }
     }
 
+    public bool ActiveCanvasCheck(string TargetName)
+    {
+        if (ActiveCanvas.Contains(TargetName))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+
     private CanvasData getCanvas(string Name)
     {
         if(CanvasDirectory.ContainsKey(Name))
